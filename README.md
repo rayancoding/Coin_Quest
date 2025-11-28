@@ -1,5 +1,7 @@
 READ ME - Zombie Survival Prototype
 
+Members of Group: Rayan Alyousef (101027376)
+
 Overview
 A 2D top-down Unity prototype game where the player must collect coins and avoid zombies. 
 Currently, zombies do not deal damage to the player. But there are two types of zombies players would be avoiding: the chaser and walker zombies.
