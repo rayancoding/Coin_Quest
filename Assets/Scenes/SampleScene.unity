@@ -244,8 +244,8 @@ Transform:
   m_GameObject: {fileID: 261165574}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2956, y: -0.145, z: 0}
-  m_LocalScale: {x: 18.27096, y: 12.476351, z: 4.6479}
+  m_LocalPosition: {x: -0.1397, y: -0.145, z: 0}
+  m_LocalScale: {x: 19.140657, y: 13.070226, z: 4.86914}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -413,9 +413,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 824ab654f4649b744bc8d5d3ff096e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinTimer: 10
+  coinTimer: 4
   waitTime: 1.5
-  zombieTimer: 7.5
+  zombieTimer: 3.5
   coinPrefabs:
   - {fileID: 3915631861354214893, guid: a0045aae754055a4ea7227a28e16b977, type: 3}
   - {fileID: 8838178406359279349, guid: 2bcbafc25818db94f8bcb2d6120e39ac, type: 3}
