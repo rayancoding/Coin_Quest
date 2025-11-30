@@ -3,8 +3,8 @@ using UnityEngine;
 public class EnemyControl : MonoBehaviour
 {
     [Header("Main")]
-    public float zombieHealth = 100f;
-    private float bulletDamage = 20f;
+    public float zombieHealth = 50f;
+    private float bulletDamage = 25f;
 
     private Transform player;
     private Vector2 walkDir;
@@ -74,6 +74,8 @@ public class EnemyControl : MonoBehaviour
         {
             zombieHealth -= bulletDamage;
         }
+
+        Debug.Log("Zombie took " + bulletDamage + "damage!");
     }
 
     void Die()

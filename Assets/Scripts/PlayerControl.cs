@@ -1,19 +1,28 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    [Header("Main")]
+    [Header("Movement")]
     [SerializeField] private float maxSpeed = 6f;
     [SerializeField] private float acceleration = 20f;
     [SerializeField] private float deceleration = 25f;
     [SerializeField] private float inputDeadZone = 0.1f;
+    [SerializeField] private Rigidbody2D rbPlayer;
 
-    [SerializeField] private Rigidbody2D rb;
+    [Header("Zombie Control")]
+    [SerializeField] private float damageWalker = 5f;
+    [SerializeField] private float damageChaser = 5f;
+    [SerializeField] private float playerHealth = 100f;
 
     private Vector2 inputDirection;
-    private float moveDir;
+    private bool isContacting;
+    private float tickRate = 3f;
+    private float currentDamage;
+
+    public float moveDir;
 
     void Start()
     {
@@ -55,7 +64,7 @@ public class PlayerControl : MonoBehaviour
     private void ApplyMovement()
     {
         Vector2 targetVelocity = inputDirection * maxSpeed;
-        Vector2 currentVelocity = rb.linearVelocity;
+        Vector2 currentVelocity = rbPlayer.linearVelocity;
 
         float accelRate;
 
@@ -75,6 +84,42 @@ public class PlayerControl : MonoBehaviour
         
             );
 
-        rb.linearVelocity = newVelocity;
+        rbPlayer.linearVelocity = newVelocity;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        isContacting = true;
+
+        if (collision.CompareTag("WalkerEnemy"))
+        {
+            currentDamage = damageWalker;
+        }
+        else if (collision.CompareTag("ChaserEnemy"))
+        {
+            currentDamage = damageChaser;
+        }
+        else
+        {
+            return;
+        }
+
+        StartCoroutine(ContactDamage());
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isContacting = false;
+    }
+
+    IEnumerator ContactDamage()
+    {
+        while (isContacting)
+        {
+            yield return new WaitForSeconds(tickRate);
+            playerHealth -= currentDamage;
+
+            Debug.Log(currentDamage + " damage taken " + "Player Health = " + playerHealth);
+        }
     }
 }

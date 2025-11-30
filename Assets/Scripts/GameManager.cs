@@ -36,21 +36,22 @@ public class GameManager : MonoBehaviour
 
             StartCoroutine(CoinCoroutine());
         }
-
+        /*
         StartCoroutine(FirstZombie());
 
         IEnumerator FirstZombie()
         {
-            Debug.Log("Game Started");
+            //Debug.Log("Game Started");
 
             yield return new WaitForSeconds(waitTime);
 
             ZombieSpawner();
 
-            Debug.Log("Spawned Initial Zombie");
+            //Debug.Log("Spawned Initial Zombie");
 
             StartCoroutine(SpawnZombie());
         }
+        */
     }
     void Update()
     {
@@ -71,8 +72,6 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(coinTimer);
 
             SpawnCoin();
-
-            //Debug.Log("Spawned Coin Number : " + spawnCount);
         }
     }
 
@@ -83,7 +82,6 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(zombieTimer);
 
             ZombieSpawner();
-
         }
     }
 
@@ -92,7 +90,6 @@ public class GameManager : MonoBehaviour
         int coinType = Random.Range(0, coinPrefabs.Count);
         Vector3 coinPosition = new Vector3(Random.Range(-6f, 6f), Random.Range(-4.5f, 4.5f), 1f);
         Instantiate(coinPrefabs[coinType], coinPosition, Quaternion.identity);
-        //Rigidbody2D rb = coin.GetComponent<Rigidbody2D>();
     }
 
     private void ZombieSpawner()

@@ -1,18 +1,22 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class GunControl : MonoBehaviour
+public class BulletControl : MonoBehaviour
 {
     [Header("Main")]
     [SerializeField] private GameObject bullet;
-    [SerializeField] private float bulletSpeed;
+    [SerializeField] private float bulletSpeed = 3f;
 
-    [SerializeField] private Rigidbody2D rb;
-
-
+    private Rigidbody2D rb;
+    PlayerControl playercontrol;
+    private Vector3 sD;
+    private float shootDir;
 
     void Start()
     {
-
+        shootDir = playercontrol.moveDir;
+        rb = GetComponent<Rigidbody2D>();
+        Vector3 sD = new Vector3((shootDir * bulletSpeed), 0, 0);
     }
 
     void Update()
@@ -22,12 +26,12 @@ public class GunControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-            
+        ControlBullet();
     }
 
     private void ControlBullet()
     {
-
+        rb.transform.Translate(sD * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -38,6 +42,8 @@ public class GunControl : MonoBehaviour
         {
             enemycontrol.TakeDamage();
             Destroy(gameObject);
+
+            Debug.Log("Zombie hit!");
         }
 
     }
