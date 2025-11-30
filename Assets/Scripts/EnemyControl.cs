@@ -3,7 +3,8 @@ using UnityEngine;
 public class EnemyControl : MonoBehaviour
 {
     [Header("Main")]
-    private float zombieHealth = 100f;
+    public float zombieHealth = 100f;
+    private float bulletDamage = 20f;
 
     private Transform player;
     private Vector2 walkDir;
@@ -63,12 +64,20 @@ public class EnemyControl : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void TakeDamage()
     {
-        if (other.CompareTag("Bullet"))
+        if ((zombieHealth - bulletDamage) <= 0)
         {
-            zombieHealth -= 20f;
-            Destroy(other);
+            Die();
         }
+        else
+        {
+            zombieHealth -= bulletDamage;
+        }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }

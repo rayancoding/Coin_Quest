@@ -7,12 +7,14 @@ public class GunControl : MonoBehaviour
     [SerializeField] private float bulletSpeed;
 
     [SerializeField] private Rigidbody2D rb;
+
+
+
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -25,6 +27,18 @@ public class GunControl : MonoBehaviour
 
     private void ControlBullet()
     {
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        EnemyControl enemycontrol = collision.GetComponent<EnemyControl>();
+
+        if (collision.CompareTag("WalkerZombie") || collision.CompareTag("ChaserZombie"))
+        {
+            enemycontrol.TakeDamage();
+            Destroy(gameObject);
+        }
 
     }
 }
