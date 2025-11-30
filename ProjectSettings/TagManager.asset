@@ -6,6 +6,7 @@ TagManager:
   tags:
   - WalkerEnemy
   - ChaserEnemy
+  - Bullet
   layers:
   - Default
   - TransparentFX

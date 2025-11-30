@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class EnemyControl : MonoBehaviour
 {
+    [Header("Main")]
+    private float zombieHealth = 100f;
+
     private Transform player;
     private Vector2 walkDir;
     private string walkerType;
@@ -16,12 +19,6 @@ public class EnemyControl : MonoBehaviour
             speed = 2.0f;
 
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-            if (playerObj == null)
-            {
-                Debug.LogError("EnemyControl: No object tagged 'Player' found.");
-                enabled = false;
-                return;
-            }
 
             player = playerObj.transform;
         }
@@ -63,6 +60,15 @@ public class EnemyControl : MonoBehaviour
             Vector2 chaseDir = (playerPos - myPos).normalized;
 
             transform.position += (Vector3)(chaseDir * speed * Time.fixedDeltaTime);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Bullet"))
+        {
+            zombieHealth -= 20f;
+            Destroy(other);
         }
     }
 }
